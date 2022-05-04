@@ -1,0 +1,59 @@
+version: "3.6"
+
+x-build-args: &build_args
+  INSTALL_PYTHON_VERSION: "3.10.4"
+
+x-default-volumes: &default_volumes
+  volumes:
+    - ./:/api
+    - ./dev.db:/tmp/dev.db
+
+services:
+  flask-dev:
+    build:
+      context: .
+      target: development
+      args:
+        <<: *build_args
+    image: "my_api-development"
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./.env
+    # environment:
+    #   FLASK_APP: 'my_api.app:create_app()'
+    #   FLASK_ENV: development
+    #   FLASK_DEBUG: 0
+    #   LOG_LEVEL: 'DEBUG'
+    <<: *default_volumes
+
+  flask-prod:
+    build:
+      context: .
+      target: production
+      args:
+        <<: *build_args
+    image: "my_api-production"
+    ports:
+      - "5000:5000"
+    environment:
+      FLASK_ENV: production
+      FLASK_DEBUG: 0
+      LOG_LEVEL: 'INFO'
+      GUNICORN_WORKERS: 4
+    <<: *default_volumes
+
+  manage:
+    build:
+      context: .
+      target: development
+      args:
+        <<: *build_args
+    entrypoint: flask
+    environment:
+      FLASK_ENV: production
+      FLASK_DEBUG: 0
+    image: "ampulheta-manage"
+    stdin_open: true
+    tty: true
+    <<: *default_volumes

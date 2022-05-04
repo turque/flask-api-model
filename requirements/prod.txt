@@ -1,0 +1,35 @@
+# Everything needed in production
+
+# Flask
+Flask==2.1.1
+Flask-RESTful==0.3.9
+Werkzeug==2.1.1
+
+# Database
+Flask-SQLAlchemy==2.5.1
+flask-marshmallow==0.14.0
+marshmallow_sqlalchemy==0.28.0
+SQLAlchemy==1.4.35
+psycopg2-binary==2.9.3
+
+# Migrations
+Flask-Migrate==3.1.0
+
+# Deployment
+gevent==21.12.0
+gunicorn==20.1.0
+supervisor==4.2.4
+
+# Auth
+Flask-JWT-Extended==4.3.1
+passlib==1.7.4
+
+# Environment variable parsing
+environs==9.5.0
+
+# Logs
+flask-loguru==1.0.0
+
+# API Specs
+apispec[yaml]==5.1.1
+apispec-webframeworks==0.5.2
