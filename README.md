@@ -147,6 +147,6 @@ git commit -m "Add migrations"
 ```
 
 Make sure folder `migrations/versions` is not empty.
-
+.
 
 
